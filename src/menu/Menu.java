@@ -19,12 +19,12 @@ public class Menu {
     public static void menuInicial () {
         System.out.println(
                               """
-                              Hola, ésta es una aplicación que permite 
+                              Hola, ésta es una aplicación que permite
                               realizar un control de inventarios.
                               
                               Para iniciar vamos a validar si el archivo
                               de inventarios productos.txt existe, si no
-                              es así debemos crearlo. 
+                              es así debemos crearlo.
                               
                               ¿Deseas continuar?
                               1. Si.

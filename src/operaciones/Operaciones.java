@@ -6,30 +6,28 @@ import productos.Productos;
 
 public class Operaciones {
     private static final String rutaArchivo = "D:\\PROYECTOSJAVA\\PROGRAMACION\\productos.txt";
+
     public static void archivo () {
-        try {
-            File file = new File(rutaArchivo);
-            //String rutaArchivo = "D:\\PROYECTOSJAVA\\PROGRAMACION\\productos.txt";
 
-
-            // Validar si el archivo existe, si no, crearlo.
-            if (!file.exists()) {
-                file.createNewFile();
+            try {
+                String rutaArchivo = "D:\\PROYECTOSJAVA\\PROGRAMACION\\productos.txt";
+                File file = new File("D:\\PROYECTOSJAVA\\PROGRAMACION\\productos.txt");
+                // Validar si el archivo existe, si no, crearlo.
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
                 FileWriter fileWriter = new FileWriter("productos.txt");
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
                 bufferedWriter.write("idProducto, nombreProducto, categoria, precio, cantidadDisponible");
                 bufferedWriter.close();
-
-                }
-
-        }catch (
-                Exception e) {
-            System.out.println("Error al crear el archivo: ");
+            } catch (
+                    Exception e) {
+                e.printStackTrace();
+            }
         }
-    }
 
 
-    public static void agregar () {
+        public static void agregar () {
         System.out.println("Esta funcion agrega nuevos productos");
         Scanner scanner = new Scanner(System.in);
         try { BufferedWriter bw = new BufferedWriter(new FileWriter(rutaArchivo, true));
