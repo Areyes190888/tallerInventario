@@ -1,8 +1,8 @@
 package inventario;
 
-import archivo.Archivo;
 import menu.Menu;
 import operaciones.Operaciones;
+import productos.Productos;
 import java.util.Scanner;
 
 public class Inventario {
@@ -14,13 +14,16 @@ public class Inventario {
         opcionMenuInicial = scanner.nextInt();
         if (opcionMenuInicial == 1) {
             //Validar si existe archivo productos.txt, si no crearlo para iniciar tareas.
-            Archivo.archivo();
+            Operaciones.archivo();
+
             int opcionMenuInventario;
-            Menu.menu();
-            opcionMenuInventario = scanner.nextInt();
+            do {
+                Menu.menu();
+                opcionMenuInventario = scanner.nextInt();
 
                 switch (opcionMenuInventario) {
                     case 1:
+                        //Productos(int idProducto, String nombre, String categoria, double precio, int cantidad)
                         Operaciones.agregar();
                         break;
 
@@ -49,7 +52,7 @@ public class Inventario {
                         System.out.println("Por favor seleccione una opción entre 0 y 7");
 
                 }
-
+            } while (opcionMenuInventario != 0);
         } else {
             System.out.println("Gracias. Hasta la próxima.");
         }
