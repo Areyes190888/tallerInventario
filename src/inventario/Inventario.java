@@ -4,18 +4,23 @@ import menu.Menu;
 import operaciones.Operaciones;
 import java.util.Scanner;
 
+import java.util.Scanner;
+
 public class Inventario {
     public static void main(String[] args) {
         Menu.menuInicial();
         int opcionMenuInicial;
         Scanner scanner = new Scanner(System.in);
         opcionMenuInicial = scanner.nextInt();
+
         if (opcionMenuInicial == 1) {
-            //Validar si existe archivo productos.txt, si no crearlo para iniciar tareas.
+            // Validar si existe archivo productos.txt, si no crearlo para iniciar tareas.
             Operaciones.archivo();
+
             int opcionMenuInventario;
             Menu.menu();
             opcionMenuInventario = scanner.nextInt();
+
             switch (opcionMenuInventario) {
                 case 1:
                     Operaciones.agregar();

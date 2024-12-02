@@ -1,1 +1,0 @@
-idProducto, nombreProducto, categoria, precio, cantidadDisponible
