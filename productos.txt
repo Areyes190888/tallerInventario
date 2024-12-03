@@ -1,0 +1,16 @@
+idProducto, nombreProducto, categoria, precio, cantidadDisponible
+1,guaro,bebidas,600.0,500
+3,computador,electrónicos,12000.0,2
+4,teclados,electrónicos,500.0,85
+idProducto, nombreProducto, categoria, precio, cantidadDisponible
+idProducto, nombreProducto, categoria, precio, cantidadDisponible
+idProducto, nombreProducto, categoria, precio, cantidadDisponible
+idProducto, nombreProducto, categoria, precio, cantidadDisponible
+idProducto, nombreProducto, categoria, precio, cantidadDisponible
+idProducto, nombreProducto, categoria, precio, cantidadDisponible
+idProducto, nombreProducto, categoria, precio, cantidadDisponible
+idProducto, nombreProducto, categoria, precio, cantidadDisponible
+idProducto, nombreProducto, categoria, precio, cantidadDisponible
+idProducto, nombreProducto, categoria, precio, cantidadDisponible
+idProducto, nombreProducto, categoria, precio, cantidadDisponible
+idProducto, nombreProducto, categoria, precio, cantidadDisponible

@@ -4,7 +4,7 @@ import menu.Menu;
 import operaciones.Operaciones;
 import java.util.Scanner;
 
-import java.util.Scanner;
+
 
 public class Inventario {
     public static void main(String[] args) {

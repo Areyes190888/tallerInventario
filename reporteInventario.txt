@@ -1,0 +1,6 @@
+ID,Nombre,Categoría,Precio,Cantidad,Valor
+1,guaro,bebidas,600.0,500,300000.0
+3,computador,electrónicos,12000.0,2,24000.0
+4,teclados,electrónicos,500.0,85,42500.0
+
+Valor total del inventario: 366500.0

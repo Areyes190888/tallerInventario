@@ -6,27 +6,37 @@ import java.io.*;
 import java.util.*;
 
 public class Operaciones {
-    private static final String rutaArchivo = "D:\\PROYECTOSJAVA\\PROGRAMACION\\productos.txt";
+    private static final String rutaArchivo = "D:\\PROYECTOSJAVA\\PROGRAMACION\\tallerInventario\\productos.txt";
+    private static final String rutaReporteInventario = "D:\\PROYECTOSJAVA\\PROGRAMACION\\tallerInventario\\reporteInventario.txt";
+
     private static List<Productos> productos = new ArrayList<>();
 
-    // si no existe el archivo en la ruta debo crearlo
+    // si no existe el archivo en la ruta debo crearlo. Adicional indica si se creó o no el archivo.
     public static void archivo() {
         try {
             File file = new File(rutaArchivo);
-            if (!file.exists()) {
-                file.createNewFile();
+            try {
+                if (file.createNewFile()) {
+                    System.out.println("Archivo creado exitosamente.");
+                } else {
+                    System.out.println("El archivo ya existe.");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+
             }
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(rutaArchivo, true));
             bufferedWriter.write("idProducto, nombreProducto, categoria, precio, cantidadDisponible");
             bufferedWriter.newLine(); // Añadir salto de línea después del encabezado
             bufferedWriter.close();
-            cargarProductos(); // Cargar los productos al iniciar
+            cargarProductos(); // Cargar los productos al iniciar para no borrarlos
         } catch (IOException e) {
             System.out.println("Error al crear el archivo o escribir el registro: " + e.getMessage());
         }
     }
 
-    // crear productos en el archivo
+    // crear productos que se encuentran en el archivo
+
     public static void cargarProductos() {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
@@ -40,16 +50,15 @@ public class Operaciones {
 
                     try {
 
-                        int idProducto = Integer.parseInt(datos[0].trim());
+                        gi
                         String nombre = datos[1].trim();
                         String categoria = datos[2].trim();
                         double precio = Double.parseDouble(datos[3].trim());
                         int cantidad = Integer.parseInt(datos[4].trim());
 
-                        // Si todo se parsea correctamente, agregamos el producto
+
                         productos.add(new Productos(idProducto, nombre, categoria, precio, cantidad));
                     } catch (NumberFormatException e) {
-                        System.out.println("Error al parsear los datos de la línea: " + linea);
                         System.out.println("Detalles del error: " + e.getMessage());
                     }
                 }
@@ -70,7 +79,7 @@ public class Operaciones {
 
             if (idProducto == -1) break;
 
-            // Consumir el salto de línea pendiente
+            // se usa porque el nextline no toma un salto de línea.
             scanner.nextLine();
 
             System.out.println("Ingresar nombre del producto:");
@@ -96,7 +105,7 @@ public class Operaciones {
         }
     }
 
-    // Guardar productos en el archivo
+    // guardar productos en el archivo
     private static void guardarProductos() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaArchivo))) {
             bw.write("idProducto, nombreProducto, categoria, precio, cantidadDisponible");
@@ -110,7 +119,7 @@ public class Operaciones {
         }
     }
 
-    // me permite
+    // actualizar un registro del archivo, busca por ID del producto.
     public static void actualizar() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese el ID del producto a actualizar:");
@@ -137,7 +146,7 @@ public class Operaciones {
         System.out.println("Ingrese la nueva cantidad del producto:");
         producto.setCantidad(scanner.nextInt());
 
-        // Guardar cambios
+        // actualiza el registro en el archivo
         guardarProductos();
         System.out.println("Producto actualizado.");
     }
@@ -152,7 +161,7 @@ public class Operaciones {
         return null;
     }
 
-    // Método para eliminar un producto
+    // eliminar productos del arhivo producto.txt
     public static void eliminar() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese el ID del producto a eliminar:");
@@ -183,7 +192,7 @@ public class Operaciones {
         }
     }
 
-    // Obtener el producto con mayor precio
+    // buscar el producto con mayor precio
     public static void precioMayor() {
         if (productos.isEmpty()) {
             System.out.println("No hay productos en el inventario.");
@@ -212,9 +221,23 @@ public class Operaciones {
 
     // Generar reporte de inventario
     public static void reporteInventario() {
+        double valorTotal = 0;
         System.out.println("Reporte de inventario:");
-        for (Productos producto : productos) {
-            System.out.println(producto);
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaReporteInventario))) {
+            bw.write("ID,Nombre,Categoría,Precio,Cantidad,Valortotal\n");
+            for (Productos producto : productos) {
+                double valorProducto = producto.getPrecio() * producto.getCantidad();
+                valorTotal += valorProducto;
+                bw.write(producto.getIdProducto() + "," + producto.getNombre() + "," + producto.getCategoria() + ","
+                        + producto.getPrecio() + "," + producto.getCantidad() + "," + valorProducto + "\n");
+            }
+            bw.write("\nValor total del inventario: " + valorTotal);
+        } catch (IOException e) {
+            System.out.println("Error al generar el reporte: " + e.getMessage());
         }
     }
 }
+
+
+
+
